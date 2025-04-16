@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="300.0" styleClass="root" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.palimpsest.PalimpsestController">
+    <children>
+        <!-- Header -->
+        <Label styleClass="header-text" text="Palimpsest">
+            <font>
+                <Font name="Roboto Medium" size="14.0" />
+            </font>
+            <padding>
+                <Insets bottom="8.0" left="10.0" top="8.0" />
+            </padding>
+        </Label>
+        <!-- Clipboard List -->
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+            <content>
+                <VBox spacing="2.0" styleClass="list-container">
+                    <children>
+                        <!-- Rows 1-6: Newer items -->
+                        <HBox fx:id="row1" styleClass="clipboard-row">
+                            <children>
+                                <Label fx:id="text1" styleClass="clipboard-text" text="WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) " HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="time1" ellipsisString="12:24 PM" prefHeight="18.0" prefWidth="70.0" styleClass="clipboard-time" text="12:34 PM" textOverrun="WORD_ELLIPSIS" wrapText="true" />
+                                        <Button fx:id="copy1" onAction="#copy" styleClass="copy-button">
+                                            <graphic>
+                                                <ImageView fitHeight="18.0" fitWidth="18.0">
+                                                    <image>
+                                                        <Image url="@clipboard.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <HBox fx:id="row2" styleClass="clipboard-row">
+                            <children>
+                                <Label fx:id="text2" styleClass="clipboard-text" text="Clipboard item 2..." HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_RIGHT" spacing="5.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="time2" prefWidth="100.0" styleClass="clipboard-time" text="12:33 PM" />
+                                        <Button fx:id="copy2" onAction="#copy" styleClass="copy-button">
+                                            <graphic>
+                                                <ImageView fitHeight="18.0" fitWidth="18.0">
+                                                    <image>
+                                                        <Image url="@clipboard.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <HBox fx:id="row3" styleClass="clipboard-row">
+                            <children>
+                                <Label fx:id="text3" styleClass="clipboard-text" text="Clipboard item 3..." HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_RIGHT" spacing="5.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="time3" prefWidth="100.0" styleClass="clipboard-time" text="12:32 PM" />
+                                        <Button fx:id="copy3" onAction="#copy" styleClass="copy-button">
+                                            <graphic>
+                                                <ImageView fitHeight="18.0" fitWidth="18.0">
+                                                    <image>
+                                                        <Image url="@clipboard.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <HBox fx:id="row4" styleClass="clipboard-row">
+                            <children>
+                                <Label fx:id="text4" styleClass="clipboard-text" text="Clipboard item 4..." HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_RIGHT" spacing="5.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="time4" prefWidth="100.0" styleClass="clipboard-time" text="12:31 PM" />
+                                        <Button fx:id="copy4" onAction="#copy" styleClass="copy-button">
+                                            <graphic>
+                                                <ImageView fitHeight="18.0" fitWidth="18.0">
+                                                    <image>
+                                                        <Image url="@clipboard.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <HBox fx:id="row5" styleClass="clipboard-row">
+                            <children>
+                                <Label fx:id="text5" styleClass="clipboard-text" text="Clipboard item 5..." HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_RIGHT" spacing="5.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="time5" prefWidth="100.0" styleClass="clipboard-time" text="12:30 PM" />
+                                        <Button fx:id="copy5" onAction="#copy" styleClass="copy-button">
+                                            <graphic>
+                                                <ImageView fitHeight="18.0" fitWidth="18.0">
+                                                    <image>
+                                                        <Image url="@clipboard.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <HBox fx:id="row6" styleClass="clipboard-row">
+                            <children>
+                                <Label fx:id="text6" styleClass="clipboard-text" text="Clipboard item 6..." HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_RIGHT" spacing="5.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="time6" prefWidth="100.0" styleClass="clipboard-time" text="12:29 PM" />
+                                        <Button fx:id="copy6" onAction="#copy" styleClass="copy-button">
+                                            <graphic>
+                                                <ImageView fitHeight="18.0" fitWidth="18.0">
+                                                    <image>
+                                                        <Image url="@clipboard.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <!-- Rows 7-10: Older items, faded -->
+                        <HBox fx:id="row7" styleClass="clipboard-row">
+                            <children>
+                                <Label fx:id="text7" styleClass="clipboard-old" text="Clipboard item 7..." HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_RIGHT" spacing="5.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="time7" prefWidth="100.0" styleClass="clipboard-time-old" text="12:28 PM" />
+                                        <Button fx:id="copy7" onAction="#copy" styleClass="copy-button">
+                                            <graphic>
+                                                <ImageView fitHeight="18.0" fitWidth="18.0">
+                                                    <image>
+                                                        <Image url="@clipboard.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <HBox fx:id="row8" styleClass="clipboard-row">
+                            <children>
+                                <Label fx:id="text8" styleClass="clipboard-old" text="Clipboard item 8..." HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_RIGHT" spacing="5.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="time8" prefWidth="100.0" styleClass="clipboard-time-old" text="12:27 PM" />
+                                        <Button fx:id="copy8" onAction="#copy" styleClass="copy-button">
+                                            <graphic>
+                                                <ImageView fitHeight="18.0" fitWidth="18.0">
+                                                    <image>
+                                                        <Image url="@clipboard.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <HBox fx:id="row9" styleClass="clipboard-row">
+                            <children>
+                                <Label fx:id="text9" styleClass="clipboard-old" text="Clipboard item 9..." HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_RIGHT" spacing="5.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="time9" prefWidth="100.0" styleClass="clipboard-time-old" text="12:26 PM" />
+                                        <Button fx:id="copy9" onAction="#copy" styleClass="copy-button">
+                                            <graphic>
+                                                <ImageView fitHeight="18.0" fitWidth="18.0">
+                                                    <image>
+                                                        <Image url="@clipboard.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <HBox fx:id="row10" styleClass="clipboard-row">
+                            <children>
+                                <Label fx:id="text10" styleClass="clipboard-old" text="Clipboard item 10..." HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_RIGHT" spacing="5.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="time10" prefWidth="100.0" styleClass="clipboard-time-old" text="12:25 PM" />
+                                        <Button fx:id="copy10" onAction="#copy" styleClass="copy-button">
+                                            <graphic>
+                                                <ImageView fitHeight="18.0" fitWidth="18.0">
+                                                    <image>
+                                                        <Image url="@clipboard.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets left="5.0" right="5.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</VBox>

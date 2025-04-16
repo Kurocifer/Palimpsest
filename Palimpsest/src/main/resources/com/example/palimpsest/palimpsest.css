@@ -1,0 +1,73 @@
+.root {
+    -fx-background-color: #1E293B;
+    -fx-background-radius: 5;
+}
+
+.header-text {
+    -fx-text-fill: #D1D5DB;
+    -fx-font-family: "Roboto Medium";
+    -fx-font-size: 14;
+}
+
+.list-container {
+    -fx-background-color: #1E293B;
+}
+
+.clipboard-row {
+    -fx-background-color: #374151;
+    -fx-padding: 30;
+    -fx-background-radius: 4;
+    -fx-spacing: 100;
+}
+
+.clipboard-row:hover {
+    -fx-background-color: #4B5563;
+}
+
+.clipboard-text {
+    -fx-text-fill: #D1D5DB;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 15;
+    -fx-wrap-text: true;
+}
+
+.clipboard-old {
+    -fx-text-fill: #7C3AED;
+    -fx-opacity: 0.8;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 15;
+    -fx-wrap-text: true;
+}
+
+.clipboard-time {
+    -fx-text-fill: #D1D5DB;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 15;
+    -fx-alignment: center-right;
+}
+
+.clipboard-time-old {
+    -fx-text-fill: #7C3AED;
+    -fx-opacity: 0.8;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 15;
+    -fx-alignment: center-right;
+}
+
+.copy-button {
+    -fx-background-color: #F59E0B;
+    -fx-background-radius: 4;
+    -fx-padding: 2;
+    -fx-min-width: 24;
+    -fx-min-height: 24;
+}
+
+.copy-button:hover {
+    -fx-background-color: #D97706;
+    -fx-effect: dropshadow(gaussian, #F59E0B, 5, 0.3, 0, 0);
+}
+
+.copy-button:pressed {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
