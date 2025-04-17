@@ -6,7 +6,7 @@
 .header-text {
     -fx-text-fill: #D1D5DB;
     -fx-font-family: "Roboto Medium";
-    -fx-font-size: 14;
+    -fx-font-size: 20;
 }
 
 .list-container {
