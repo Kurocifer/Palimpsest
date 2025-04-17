@@ -1,8 +1,8 @@
-module com.example.palimpsest {
+module com.palimpsest {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.palimpsest to javafx.fxml;
-    exports com.example.palimpsest;
+    opens com.palimpsest to javafx.fxml;
+    exports com.palimpsest;
 }

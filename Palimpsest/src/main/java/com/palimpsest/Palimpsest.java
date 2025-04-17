@@ -1,4 +1,4 @@
-package com.example.palimpsest;
+package com.palimpsest;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

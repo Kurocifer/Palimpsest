@@ -1,4 +1,4 @@
-package com.example.palimpsest;
+package com.palimpsest;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
