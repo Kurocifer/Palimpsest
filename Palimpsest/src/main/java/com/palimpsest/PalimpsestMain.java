@@ -1,7 +1,8 @@
 package com.palimpsest;
 
-import com.palimpsest.service.TrayManager;
+import com.palimpsest.service.tray.TrayManager;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,7 +23,7 @@ public class PalimpsestMain extends Application {
         stage.setScene(scene);
 
         try {
-            trayManager = new TrayManager();
+            trayManager = new TrayManager(Platform::exit);
             LOGGER.info("Tray icon initialized successfully");
         } catch (AWTException e) {
             LOGGER.severe("Failed to initialize tray icon: " + e.getMessage());
