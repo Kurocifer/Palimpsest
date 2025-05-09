@@ -35,7 +35,7 @@
                         <!-- Rows 1-6: Newer items -->
                         <HBox fx:id="row1" styleClass="clipboard-row">
                             <children>
-                                <Label fx:id="text1" styleClass="clipboard-text" text="WARNING: ils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (file:/home/kiyotaka/.m2/repository/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-linux.jar) " HBox.hgrow="ALWAYS" />
+                                <Label fx:id="text1" styleClass="clipboard-text" text="No Text here" HBox.hgrow="ALWAYS" />
                                 <HBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="NEVER">
                                     <children>
                                         <Label fx:id="time1" ellipsisString="12:24 PM" prefHeight="18.0" prefWidth="70.0" styleClass="clipboard-time" text="12:34 PM" textOverrun="WORD_ELLIPSIS" wrapText="true" />
