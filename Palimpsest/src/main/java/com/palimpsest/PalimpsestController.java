@@ -1,9 +1,15 @@
 package com.palimpsest;
 
 import com.palimpsest.model.TextCopy;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.Clipboard;
+import javafx.util.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -11,6 +17,8 @@ import java.util.logging.Logger;
 public class PalimpsestController {
     private static final Logger LOGGER = Logger.getLogger(PalimpsestController.class.getName());
     private final List<TextCopy> textCopies = new ArrayList<>(10);
+    private String lastClipboardText = "";
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
 
     @FXML private Label text1;
     @FXML private Label time1;
@@ -45,12 +53,29 @@ public class PalimpsestController {
 
     @FXML
     public void initialize() {
-        // Populate list with 10 dummies (newest first)
-        for (int i = 10; i >= 1; i--) {
-            addTextCopy(new TextCopy("copy" + i, String.format("12:%02d PM", i)));
-        }
+        // Initialize UI (empty)
+        updateUI();
 
-        // Map list to UI rows
+        // Start clipboard polling
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(500), event -> checkClipboard()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void checkClipboard() {
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        String currentText = clipboard.getString();
+        if (currentText != null && !currentText.isEmpty() && !currentText.equals(lastClipboardText)) {
+            lastClipboardText = currentText;
+            String timestamp = LocalTime.now().format(timeFormatter);
+            TextCopy newCopy = new TextCopy(currentText, timestamp);
+            addTextCopy(newCopy);
+            LOGGER.info("New clipboard text: " + currentText + ", timestamp: " + timestamp);
+            updateUI();
+        }
+    }
+
+    private void updateUI() {
         Label[] textLabels = {text1, text2, text3, text4, text5, text6, text7, text8, text9, text10};
         Label[] timeLabels = {time1, time2, time3, time4, time5, time6, time7, time8, time9, time10};
         Button[] copyButtons = {copy1, copy2, copy3, copy4, copy5, copy6, copy7, copy8, copy9, copy10};
