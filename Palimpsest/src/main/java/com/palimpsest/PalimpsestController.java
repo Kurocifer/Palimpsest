@@ -3,6 +3,7 @@ package com.palimpsest;
 import com.palimpsest.model.TextCopy;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,8 +18,8 @@ import java.util.logging.Logger;
 public class PalimpsestController {
     private static final Logger LOGGER = Logger.getLogger(PalimpsestController.class.getName());
     private final List<TextCopy> textCopies = new ArrayList<>(10);
-    private String lastClipboardText = "";
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+    private String lastClipboardText = "";
 
     @FXML private Label text1;
     @FXML private Label time1;
@@ -56,8 +57,8 @@ public class PalimpsestController {
         // Initialize UI (empty)
         updateUI();
 
-        // Start clipboard polling
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(500), event -> checkClipboard()));
+        // Start clipboard monitoring
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), event -> checkClipboard()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
@@ -71,7 +72,7 @@ public class PalimpsestController {
             TextCopy newCopy = new TextCopy(currentText, timestamp);
             addTextCopy(newCopy);
             LOGGER.info("New clipboard text: " + currentText + ", timestamp: " + timestamp);
-            updateUI();
+            Platform.runLater(this::updateUI);
         }
     }
 
