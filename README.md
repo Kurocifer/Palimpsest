@@ -62,4 +62,3 @@ Palimpsest is a lightweight clipboard history manager for Linux, built with Java
     - **Restore**: Show UI.
     - **Exit**: Close app.
 - **Persistence**: History saves to `~/.palimpsest/history.json` after each copy and loads on startup.
-- **Auto-Start**: Create a `.desktop` file in `~/.config/autostart/` to launch on login (user-configured).
