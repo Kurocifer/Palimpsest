@@ -7,21 +7,28 @@ public class TrayManager {
     private static final Logger LOGGER = Logger.getLogger(TrayManager.class.getName());
     private final SystemTray systemTray;
     private final TrayIcon trayIcon;
+    private final Image activeIcon;
+    private final Image pausedIcon;
+    private boolean isPaused;
 
     public TrayManager(Runnable quitAction, Runnable restoreAction) throws AWTException {
         if (!SystemTray.isSupported()) {
             throw new AWTException("System tray is not supported on this platform");
         }
         systemTray = SystemTray.getSystemTray();
-        Image image = Toolkit.getDefaultToolkit().getImage(
+        activeIcon = Toolkit.getDefaultToolkit().getImage(
                 TrayManager.class.getResource("/com/palimpsest/images/quill.png")
         );
-        if (image == null) {
-            LOGGER.severe("Failed to load quill.png - resource not found");
-            throw new AWTException("Image resource not found");
+        pausedIcon = Toolkit.getDefaultToolkit().getImage(
+                TrayManager.class.getResource("/com/palimpsest/images/quill_paused.png")
+        );
+        if (activeIcon == null || pausedIcon == null) {
+            LOGGER.severe("Failed to load icon(s): quill.png=" + (activeIcon == null) + ", quill_paused.png=" + (pausedIcon == null));
+            throw new AWTException("Icon resource not found");
         }
-        trayIcon = new TrayIcon(image, "Palimpsest");
+        trayIcon = new TrayIcon(activeIcon, "Palimpsest");
         trayIcon.setImageAutoSize(true);
+        isPaused = false;
 
         // Create popup menu (right-click)
         PopupMenu popup = new PopupMenu();
@@ -35,10 +42,28 @@ public class TrayManager {
             restoreAction.run();
         });
 
-        pauseItem.addActionListener(e -> LOGGER.info("Pause clicked - placeholder"));
-        resumeItem.addActionListener(e -> LOGGER.info("Resume clicked - placeholder"));
+        pauseItem.addActionListener(e -> {
+            if (!isPaused) {
+                LOGGER.info("Pause clicked - swapping to paused icon");
+                trayIcon.setImage(pausedIcon);
+                isPaused = true;
+            } else {
+                LOGGER.info("Pause clicked - already paused");
+            }
+        });
+
+        resumeItem.addActionListener(e -> {
+            if (isPaused) {
+                LOGGER.info("Resume clicked - swapping to active icon");
+                trayIcon.setImage(activeIcon);
+                isPaused = false;
+            } else {
+                LOGGER.info("Resume clicked - already active");
+            }
+        });
+
         quitItem.addActionListener(e -> {
-            LOGGER.info("Quit clicked - exiting app");
+            LOGGER.info("Quit clicked - exiting app with last icon state");
             quitAction.run();
         });
 
