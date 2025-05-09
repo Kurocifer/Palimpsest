@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class PalimpsestMain extends Application {
     private static final Logger LOGGER = Logger.getLogger(PalimpsestMain.class.getName());
-    private TrayManager trayManager;
+    private static TrayManager trayManager = null;
     private Stage primaryStage;
 
     @Override
@@ -60,6 +60,10 @@ public class PalimpsestMain extends Application {
         if (trayManager != null) {
             trayManager.removeTrayIcon();
         }
+    }
+
+    public static TrayManager getTrayManager() {
+        return trayManager;
     }
 
     public static void main(String[] args) {

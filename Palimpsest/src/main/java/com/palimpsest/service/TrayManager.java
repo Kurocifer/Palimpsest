@@ -43,12 +43,12 @@ public class TrayManager {
         });
 
         pauseItem.addActionListener(e -> {
-            if (!isPaused) {
+            if (isPaused) {
+                LOGGER.info("Pause clicked - already paused");
+            } else {
                 LOGGER.info("Pause clicked - swapping to paused icon");
                 trayIcon.setImage(pausedIcon);
                 isPaused = true;
-            } else {
-                LOGGER.info("Pause clicked - already paused");
             }
         });
 
@@ -79,5 +79,9 @@ public class TrayManager {
 
     public void removeTrayIcon() {
         systemTray.remove(trayIcon);
+    }
+
+    public boolean getIsPaused() {
+        return isPaused;
     }
 }

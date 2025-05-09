@@ -64,15 +64,17 @@ public class PalimpsestController {
     }
 
     private void checkClipboard() {
-        Clipboard clipboard = Clipboard.getSystemClipboard();
-        String currentText = clipboard.getString();
-        if (currentText != null && !currentText.isEmpty() && !currentText.equals(lastClipboardText)) {
-            lastClipboardText = currentText;
-            String timestamp = LocalTime.now().format(timeFormatter);
-            TextCopy newCopy = new TextCopy(currentText, timestamp);
-            addTextCopy(newCopy);
-            LOGGER.info("New clipboard text: " + currentText + ", timestamp: " + timestamp);
-            Platform.runLater(this::updateUI);
+        if (!PalimpsestMain.getTrayManager().getIsPaused()) {
+            Clipboard clipboard = Clipboard.getSystemClipboard();
+            String currentText = clipboard.getString();
+            if (currentText != null && !currentText.isEmpty() && !currentText.equals(lastClipboardText)) {
+                lastClipboardText = currentText;
+                String timestamp = LocalTime.now().format(timeFormatter);
+                TextCopy newCopy = new TextCopy(currentText, timestamp);
+                addTextCopy(newCopy);
+                LOGGER.info("New clipboard text: " + currentText + ", timestamp: " + timestamp);
+                Platform.runLater(this::updateUI);
+            }
         }
     }
 
