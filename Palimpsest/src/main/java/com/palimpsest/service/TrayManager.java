@@ -1,8 +1,6 @@
-package com.palimpsest.service.tray;
+package com.palimpsest.service;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.logging.Logger;
 
 public class TrayManager {
@@ -10,7 +8,7 @@ public class TrayManager {
     private final SystemTray systemTray;
     private final TrayIcon trayIcon;
 
-    public TrayManager(Runnable quitAction) throws AWTException {
+    public TrayManager(Runnable quitAction, Runnable restoreAction) throws AWTException {
         if (!SystemTray.isSupported()) {
             throw new AWTException("System tray is not supported on this platform");
         }
@@ -25,13 +23,18 @@ public class TrayManager {
         trayIcon = new TrayIcon(image, "Palimpsest");
         trayIcon.setImageAutoSize(true);
 
-        // Create popup menu
+        // Create popup menu (right-click)
         PopupMenu popup = new PopupMenu();
+        MenuItem restoreItem = new MenuItem("Restore");
         MenuItem pauseItem = new MenuItem("Pause");
         MenuItem resumeItem = new MenuItem("Resume");
         MenuItem quitItem = new MenuItem("Quit");
 
-        // Placeholder actions for Pause and Resume
+        restoreItem.addActionListener(e -> {
+            LOGGER.info("Restore clicked - triggering restore action");
+            restoreAction.run();
+        });
+
         pauseItem.addActionListener(e -> LOGGER.info("Pause clicked - placeholder"));
         resumeItem.addActionListener(e -> LOGGER.info("Resume clicked - placeholder"));
         quitItem.addActionListener(e -> {
@@ -39,19 +42,12 @@ public class TrayManager {
             quitAction.run();
         });
 
+        popup.add(restoreItem);
         popup.add(pauseItem);
         popup.add(resumeItem);
         popup.addSeparator();
         popup.add(quitItem);
         trayIcon.setPopupMenu(popup);
-
-        // Click listener for tray icon
-        trayIcon.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                LOGGER.info("Tray icon clicked - showing menu");
-            }
-        });
 
         systemTray.add(trayIcon);
     }
