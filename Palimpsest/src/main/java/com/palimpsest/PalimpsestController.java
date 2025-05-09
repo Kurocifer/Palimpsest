@@ -1,5 +1,7 @@
 package com.palimpsest;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.palimpsest.model.TextCopy;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -9,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.util.Duration;
+import java.io.File;
+import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,6 +24,8 @@ public class PalimpsestController {
     private final List<TextCopy> textCopies = new ArrayList<>(10);
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
     private String lastClipboardText = "";
+    private static final String HISTORY_FILE = Paths.get(System.getProperty("user.home"), ".palimpsest", "history.json").toString();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @FXML private Label text1;
     @FXML private Label time1;
@@ -54,7 +60,10 @@ public class PalimpsestController {
 
     @FXML
     public void initialize() {
-        // Initialize UI (empty)
+        // Load history from file
+        loadHistory();
+
+        // Initialize UI
         updateUI();
 
         // Start clipboard monitoring
@@ -107,10 +116,47 @@ public class PalimpsestController {
         if (textCopies.size() > 10) {
             textCopies.remove(10);
         }
+        saveHistory();
     }
 
     @FXML
     public void copy() {
         LOGGER.info("Other copy button clicked - placeholder");
+    }
+
+    private void saveHistory() {
+        try {
+            File historyDir = new File(HISTORY_FILE).getParentFile();
+            if (!historyDir.exists()) {
+                historyDir.mkdirs();
+            }
+            mapper.writeValue(new File(HISTORY_FILE), textCopies);
+            LOGGER.info("Saved clipboard history to " + HISTORY_FILE);
+        } catch (Exception e) {
+            LOGGER.severe("Failed to save clipboard history: " + e.getMessage());
+        }
+    }
+
+    private void loadHistory() {
+        try {
+            File historyFile = new File(HISTORY_FILE);
+            if (historyFile.exists()) {
+                List<TextCopy> loadedCopies = mapper.readValue(historyFile, new TypeReference<List<TextCopy>>() {});
+                textCopies.clear();
+                textCopies.addAll(loadedCopies);
+                if (textCopies.size() > 10) {
+                    textCopies.subList(10, textCopies.size()).clear();
+                }
+                LOGGER.info("Loaded " + textCopies.size() + " clipboard entries from " + HISTORY_FILE);
+            } else {
+                LOGGER.info("No clipboard history file found at " + HISTORY_FILE);
+            }
+        } catch (Exception e) {
+            if (e.getCause() != null) {
+                LOGGER.severe("Failed to load clipboard history: " + e.getMessage() + "; Cause: " + e.getCause().getMessage());
+            } else {
+                LOGGER.severe("Failed to load clipboard history: " + e.getMessage() + "; Cause: " + "None");
+            }
+        }
     }
 }
