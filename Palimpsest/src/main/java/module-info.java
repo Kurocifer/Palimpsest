@@ -5,5 +5,8 @@ module com.palimpsest {
     requires java.logging;
 
     opens com.palimpsest to javafx.fxml;
+    opens com.palimpsest.service to java.desktop;
+    opens com.palimpsest.model to javafx.base;
     exports com.palimpsest;
+    exports com.palimpsest.model;
 }
